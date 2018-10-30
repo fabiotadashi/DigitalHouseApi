@@ -7,5 +7,5 @@ data class PostDTO(
         var description: String,
         var date: LocalDateTime,
         var author: String,
-        var ImageUrl: String
+        var imageUrl: String
 )
