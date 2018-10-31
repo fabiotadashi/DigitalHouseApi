@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/posts")
-class PostController {
+class PostsController {
 
     @Autowired
     lateinit var service: PostService
