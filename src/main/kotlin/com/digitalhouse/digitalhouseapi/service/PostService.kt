@@ -7,5 +7,7 @@ interface PostService {
     fun getPostList() : List<PostDTO>
     fun createPost(dto: PostDTO)
     fun reset()
+    fun delete(id: Int): Boolean
+    fun update(id: Int, dto: PostDTO): PostDTO
 
 }
