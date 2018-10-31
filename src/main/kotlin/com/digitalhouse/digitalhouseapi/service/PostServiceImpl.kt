@@ -24,9 +24,9 @@ class PostServiceImpl(
 
     override fun createPost(dto: PostDTO) {
         dto.date = LocalDateTime.now()
-        dto.id = id.getAndIncrement()
+        dto.id = id.get()
         dto.imageUrl = if (dto.imageUrl?.isEmpty() != false) "https://i.imgur.com/Ci9D35a.png" else dto.imageUrl
-        postMap[id.get()] = dto
+        postMap[id.getAndIncrement()] = dto
     }
 
     override fun update(id: Int, dto: PostDTO): PostDTO {
