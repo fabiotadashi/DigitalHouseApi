@@ -18,6 +18,17 @@ class PostsController {
         return service.getPostList()
     }
 
+    @GetMapping("/page")
+    fun get(@RequestParam("offset") offset: Int,
+            @RequestParam("limit") limit: Int): List<PostDTO> {
+        return service.getPostList(offset, limit)
+    }
+
+    @GetMapping("/page-number")
+    fun get(@RequestParam("page") page: Int): List<PostDTO> {
+        return service.getPostList(page)
+    }
+
     @PostMapping
     fun post(@RequestBody dto: PostDTO): PostDTO {
         service.createPost(dto)
@@ -25,8 +36,8 @@ class PostsController {
     }
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id : Int) {
-        if(!service.delete(id)){
+    fun delete(@PathVariable id: Int) {
+        if (!service.delete(id)) {
             throw NotFoundException("Post not found")
         }
     }
@@ -37,8 +48,8 @@ class PostsController {
     }
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id : Int,
-               @RequestBody dto: PostDTO) : PostDTO{
+    fun update(@PathVariable id: Int,
+               @RequestBody dto: PostDTO): PostDTO {
         return service.update(id, dto)
     }
 

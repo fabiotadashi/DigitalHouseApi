@@ -1,6 +1,7 @@
 package com.digitalhouse.digitalhouseapi.service
 
 import com.digitalhouse.digitalhouseapi.controller.dto.PostDTO
+import com.digitalhouse.digitalhouseapi.exception.BadRequestException
 import javassist.NotFoundException
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Service
@@ -38,6 +39,26 @@ class PostServiceImpl(
             imageUrl = if (dto.imageUrl?.isEmpty() != false) "https://i.imgur.com/Ci9D35a.png" else dto.imageUrl
         }
         return postMap[id] ?: throw NotFoundException("Post com $id não encontrado")
+    }
+
+    override fun getPostList(offset: Int, limit: Int): List<PostDTO> {
+        var pageLimit = offset + limit
+
+        if(postMap.size < offset){
+            throw BadRequestException("Page unavailable")
+        }
+        if(postMap.size < offset + limit){
+            pageLimit = postMap.size
+        }
+
+        return getPostList()
+                .subList(offset, pageLimit)
+    }
+
+    override fun getPostList(page: Int): List<PostDTO> {
+        val limit = 3
+        val offset = page * limit
+        return getPostList(offset, limit)
     }
 
     override fun reset() {
