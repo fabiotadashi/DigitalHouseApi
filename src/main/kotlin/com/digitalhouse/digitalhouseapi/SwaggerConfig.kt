@@ -10,9 +10,6 @@ import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 
-
-
-
 @Configuration
 @EnableSwagger2
 class SwaggerConfig {
